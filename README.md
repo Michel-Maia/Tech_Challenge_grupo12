@@ -61,6 +61,9 @@ Beautiful Soup - Usado para Webscraping
 
 #### ✒️ Autores
 Isabelli Andrade de Souza - https://github.com/Isabellitankian
+<br>
 Lucas Souza Andrade dos Santos - github
+<br>
 Michel de Lima Maia - https://github.com/Michel-Maia
+<br>
 Valquiria Rodrigues de Oliveira Pires - github
