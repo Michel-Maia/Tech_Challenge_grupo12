@@ -10,11 +10,15 @@ __pycache__/
 .Python
 build/
 develop-eggs/
+Scripts/
 dist/
+pip/
+pip-/
 downloads/
 eggs/
 .eggs/
-lib/
+site-packages/
+Lib/
 lib64/
 parts/
 sdist/
@@ -29,6 +33,8 @@ MANIFEST
 # Inclui o diretório chamado venv e todos os seus arquivos e subdiretórios
 venv/
 
+
+.cfg
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
