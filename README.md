@@ -67,4 +67,4 @@ Lucas Souza Andrade dos Santos - github
 <br>
 Michel de Lima Maia - https://github.com/Michel-Maia
 <br>
-Valquiria Rodrigues de Oliveira Pires - github
+Valquiria Rodrigues de Oliveira Pires - https://github.com/KyraPires
