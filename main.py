@@ -1,97 +1,44 @@
-from fastapi import FastAPI
-import os
+import csv
 import requests
-from bs4 import BeautifulSoup
+from fastapi import FastAPI
 
-# uvicorn main:app --reload
+def request_embrapa(arquivo = None):
+    urlBase = 'http://vitibrasil.cnpuv.embrapa.br/download/'
+    arquivos = ['Producao', 'ProcessaViniferas', 'ProcessaAmericanas', 'ProcessaMesa', 'ProcessaSemclass', 'Comercio', 'ImpVinhos', 
+                'ImpEspumantes', 'ImpFrescas', 'ImpPassas', 'ImpSuco', 'ExpVinho', 'ExpEspumantes', 'ExpUva', 'ExpSuco']   
+    resposta = {}
+    if arquivo == None:
+        for arquivo in arquivos:
+            url = f'{urlBase}{arquivo}.csv'
+            response = requests.get(url)
+            if response.status_code != 200:
+                resposta = {'erro': response.status_code}
+                break
+            reader = csv.DictReader(response.text.splitlines())
+            resposta[arquivo] = []
+            for linha in reader:
+                resposta[arquivo].append(linha)
+        return resposta
+    elif arquivo in arquivos:
+            url = f'{urlBase}{arquivo}.csv'
+            response = requests.get(url)
+            if response.status_code != 200:
+                resposta = {'erro': response.status_code}
+            else:
+                reader = csv.DictReader(response.text.splitlines())
+                resposta[arquivo] = []
+                for linha in reader:
+                    resposta[arquivo].append(linha)
+    else:
+        resposta = {'erro': 404} 
+    return resposta
 
 app = FastAPI()
 
+@app.get('/')
+def get_todos_arquivos():
+    return request_embrapa()
 
-@app.get("/")
-def home():
-    return {"teste"}
-                         
-def identificar_opcoes():
-    try:
-        response = requests.get('http://vitibrasil.cnpuv.embrapa.br/index.php')
-        response.raise_for_status()
-        opcoes = {}
-        soup = BeautifulSoup(response.text, 'html.parser')
-        tabela = soup.find('table', class_='tb_layout no_print')
-        botoesOpt = tabela.find_all('button', class_='btn_opt')
-        for botaoOpt in botoesOpt:
-            valor = botaoOpt.get('value')
-            texto = botaoOpt.get_text(strip=True)
-            opcoes[texto] = valor
-        return opcoes
-    except:
-        return {'status':'Erro ao prospectar pÃ¡ginas'}
-
-
-def identificar_subopcoes(opcoes):
-    if 'status' in opcoes:
-        return opcoes
-    subopcoesPorPagina = {}
-    for texto, valor in opcoes.items():
-        url = f'http://vitibrasil.cnpuv.embrapa.br/index.php?opcao={valor}'
-        try:
-            response = requests.get(url)
-            response.raise_for_status()
-            subopcoes = {}
-            soup = BeautifulSoup(response.text, 'html.parser')
-            botoesSubopt = soup.find_all('button', class_='btn_sopt')
-            for botaoSubopt in botoesSubopt:
-                textoBotaoSubopt = botaoSubopt.get_text(strip=True)
-                valorBotaoSubopt = botaoSubopt.get('value')
-                subopcoes[textoBotaoSubopt] = valorBotaoSubopt
-            subopcoesPorPagina[valor] = subopcoes
-        except:
-            return {'status': 'Erro ao prospectar abas'}
-    return subopcoesPorPagina
-
-
-def baixar_csv(subopcoes):
-    if 'status' in subopcoes:
-        return subopcoes
-    try:
-        for opt in subopcoes.keys():
-            subopts = subopcoes[opt]
-            if subopts:
-                for subopt, valor in subopts.items():
-                    url = f'http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao={valor}&opcao={opt}'
-                    response = requests.get(url)
-                    response.raise_for_status()
-                    soup = BeautifulSoup(response.text, 'html.parser')
-                    link = soup.find('a', class_='footer_content', href=True)
-                    if link['href'].endswith('.csv'):
-                        csvURL = 'http://vitibrasil.cnpuv.embrapa.br/'+link['href']
-                        print(csvURL)
-                        response = requests.get(csvURL)
-                        nomeDoCSV = os.path.basename(csvURL)
-                        with open(nomeDoCSV, 'wb') as file:
-                            file.write(response.content)
-            else:
-                url = f'http://vitibrasil.cnpuv.embrapa.br/index.php?opcao={opt}'
-                response = requests.get(url)
-                response.raise_for_status()
-                soup = BeautifulSoup(response.text, 'html.parser')
-                link = soup.find('a', class_='footer_content', href=True)
-                if link['href'].endswith('.csv'):
-                    csvURL = 'http://vitibrasil.cnpuv.embrapa.br/'+link['href']
-                    print(csvURL)
-                    response = requests.get(csvURL)
-                    nomeDoCSV = os.path.basename(csvURL)
-                    with open(nomeDoCSV, 'wb') as file:
-                        file.write(response.content)
-        return {'status':'Arquivos baixados com sucesso'}
-    except:
-        return {'status': 'Erro ao baixar CSV'}
-
-
-opcoesEncontradas = identificar_opcoes()
-print(opcoesEncontradas)
-subopcoesEncontradas = identificar_subopcoes(opcoesEncontradas)
-print(subopcoesEncontradas)
-status = baixar_csv(subopcoesEncontradas)
-print(status['status'])
+@app.get('/{arquivo:str}')
+def get_arquivo(arquivo:str):
+    return request_embrapa(arquivo)
