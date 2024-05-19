@@ -1,97 +1,77 @@
-from fastapi import FastAPI
-import os
+import csv
 import requests
-from bs4 import BeautifulSoup
-
-# uvicorn main:app --reload
-
-app = FastAPI()
+import streamlit as st
+import matplotlib.pyplot as plt
 
 
-@app.get("/")
-def home():
-    return {"teste"}
-                         
-def identificar_opcoes():
-    try:
-        response = requests.get('http://vitibrasil.cnpuv.embrapa.br/index.php')
-        response.raise_for_status()
-        opcoes = {}
-        soup = BeautifulSoup(response.text, 'html.parser')
-        tabela = soup.find('table', class_='tb_layout no_print')
-        botoesOpt = tabela.find_all('button', class_='btn_opt')
-        for botaoOpt in botoesOpt:
-            valor = botaoOpt.get('value')
-            texto = botaoOpt.get_text(strip=True)
-            opcoes[texto] = valor
-        return opcoes
-    except:
-        return {'status':'Erro ao prospectar pÃ¡ginas'}
+class Crawler:
 
-
-def identificar_subopcoes(opcoes):
-    if 'status' in opcoes:
-        return opcoes
-    subopcoesPorPagina = {}
-    for texto, valor in opcoes.items():
-        url = f'http://vitibrasil.cnpuv.embrapa.br/index.php?opcao={valor}'
-        try:
-            response = requests.get(url)
-            response.raise_for_status()
-            subopcoes = {}
-            soup = BeautifulSoup(response.text, 'html.parser')
-            botoesSubopt = soup.find_all('button', class_='btn_sopt')
-            for botaoSubopt in botoesSubopt:
-                textoBotaoSubopt = botaoSubopt.get_text(strip=True)
-                valorBotaoSubopt = botaoSubopt.get('value')
-                subopcoes[textoBotaoSubopt] = valorBotaoSubopt
-            subopcoesPorPagina[valor] = subopcoes
-        except:
-            return {'status': 'Erro ao prospectar abas'}
-    return subopcoesPorPagina
-
-
-def baixar_csv(subopcoes):
-    if 'status' in subopcoes:
-        return subopcoes
-    try:
-        for opt in subopcoes.keys():
-            subopts = subopcoes[opt]
-            if subopts:
-                for subopt, valor in subopts.items():
-                    url = f'http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao={valor}&opcao={opt}'
-                    response = requests.get(url)
-                    response.raise_for_status()
-                    soup = BeautifulSoup(response.text, 'html.parser')
-                    link = soup.find('a', class_='footer_content', href=True)
-                    if link['href'].endswith('.csv'):
-                        csvURL = 'http://vitibrasil.cnpuv.embrapa.br/'+link['href']
-                        print(csvURL)
-                        response = requests.get(csvURL)
-                        nomeDoCSV = os.path.basename(csvURL)
-                        with open(nomeDoCSV, 'wb') as file:
-                            file.write(response.content)
-            else:
-                url = f'http://vitibrasil.cnpuv.embrapa.br/index.php?opcao={opt}'
+    def request_embrapa(arquivo = None):
+        urlBase = 'http://vitibrasil.cnpuv.embrapa.br/download/'
+        arquivos = ['Producao', 'ProcessaViniferas', 'ProcessaAmericanas', 'ProcessaMesa', 'ProcessaSemclass', 'Comercio', 'ImpVinhos', 
+                    'ImpEspumantes', 'ImpFrescas', 'ImpPassas', 'ImpSuco', 'ExpVinho', 'ExpEspumantes', 'ExpUva', 'ExpSuco']   
+        resposta = {}
+        if arquivo == None:
+            for arquivo in arquivos:
+                url = f'{urlBase}{arquivo}.csv'
                 response = requests.get(url)
-                response.raise_for_status()
-                soup = BeautifulSoup(response.text, 'html.parser')
-                link = soup.find('a', class_='footer_content', href=True)
-                if link['href'].endswith('.csv'):
-                    csvURL = 'http://vitibrasil.cnpuv.embrapa.br/'+link['href']
-                    print(csvURL)
-                    response = requests.get(csvURL)
-                    nomeDoCSV = os.path.basename(csvURL)
-                    with open(nomeDoCSV, 'wb') as file:
-                        file.write(response.content)
-        return {'status':'Arquivos baixados com sucesso'}
-    except:
-        return {'status': 'Erro ao baixar CSV'}
+                if response.status_code != 200:
+                    resposta = {'erro': response.status_code}
+                    break
+                reader = csv.DictReader(response.text.splitlines())
+                resposta[arquivo] = []
+                for linha in reader:
+                    resposta[arquivo].append(linha)
+            return resposta
+        elif arquivo in arquivos:
+                url = f'{urlBase}{arquivo}.csv'
+                response = requests.get(url)
+                if response.status_code != 200:
+                    resposta = {'erro': response.status_code}
+                else:
+                    reader = csv.DictReader(response.text.splitlines())
+                    resposta[arquivo] = []
+                    for linha in reader:
+                        resposta[arquivo].append(linha)
+        else:
+            resposta = {'erro': 404} 
+        return resposta
 
 
-opcoesEncontradas = identificar_opcoes()
-print(opcoesEncontradas)
-subopcoesEncontradas = identificar_subopcoes(opcoesEncontradas)
-print(subopcoesEncontradas)
-status = baixar_csv(subopcoesEncontradas)
-print(status['status'])
+
+op = Crawler()
+
+
+def main():
+
+    
+    st.set_page_config(
+    page_title="Olá! O intutito desse request é fazer o download no site da embrapa e realizar o download dos CSVs que são de importância para nós.",
+    page_icon="👋",
+    )
+
+    st.write("# Olá! 👋👋👋 Bem vindo ao demonstrativo do site da Embrapa, no qual fazemos o request de suas APIs!")
+
+    st.sidebar.success("Estamos em obras aqui, peço que espere um pouquinho.")
+
+    st.markdown(
+        """
+        - Site da Emprapa:  http://vitibrasil.cnpuv.embrapa.br
+
+        - Contém os dados da produção:  http://vitibrasil.cnpuv.embrapa.br/index.php?opcao=opt_02
+
+        - Contém os dados do processamento:  http://vitibrasil.cnpuv.embrapa.br/index.php?opcao=opt_03
+
+        - Contém os dados da comercialização:  http://vitibrasil.cnpuv.embrapa.br/index.php?opcao=opt_04
+
+        - Contém os dados da importação: http://vitibrasil.cnpuv.embrapa.br/index.php?opcao=opt_05
+
+        - Contém os dados da Exportação:  http://vitibrasil.cnpuv.embrapa.br/index.php?opcao=opt_06
+        
+    """
+    )
+
+
+if __name__ == '__main__':
+  
+    main()
