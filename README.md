@@ -48,7 +48,7 @@ pip install uvicorn
 
 #### 🛠️ Construído com
 
-Python - Linguagem 
+Python - Linguagem <br>
 Beautiful Soup - Usado para Webscraping
 
 <br>
