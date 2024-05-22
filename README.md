@@ -28,12 +28,6 @@ A API vai servir para alimentar uma base de dados que futuramente será usada pa
 - Criar um plano para fazer o deploy da API, desenhando a arquitetura do projeto desde a ingestão até a alimentação do modelo (aqui não é necessário elaborar um modelo de ML, mas é preciso que vocês escolham um cenário interessante em que a API possa ser utilizada).
 - Fazer um MVP realizando o deploy com um link compartilhável e um repositório no github.
 
-#### 📋 Pré-requisitos
-De que coisas você precisa para instalar o software e como instalá-lo?
-
-````
-Dar exemplos
-````
 #### 🔧 Instalação
 Criando o ambiente virtual 
 
@@ -63,7 +57,7 @@ Beautiful Soup - Usado para Webscraping
 <br>
 Isabelli Andrade de Souza - https://github.com/Isabellitankian
 <br>
-Lucas Souza Andrade dos Santos - github
+Lucas Souza Andrade dos Santos - https://github.com/LSouzaAndrade
 <br>
 Michel de Lima Maia - https://github.com/Michel-Maia
 <br>

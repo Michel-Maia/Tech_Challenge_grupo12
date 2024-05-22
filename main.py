@@ -2,7 +2,7 @@ import csv
 import requests
 import streamlit as st
 import matplotlib.pyplot as plt
-
+from fastapi import FastAPI
 
 class Crawler:
 
@@ -18,10 +18,10 @@ class Crawler:
                 if response.status_code != 200:
                     resposta = {'erro': response.status_code}
                     break
-                reader = csv.DictReader(response.text.splitlines())
-                resposta[arquivo] = []
-                for linha in reader:
-                    resposta[arquivo].append(linha)
+            reader = csv.DictReader(response.text.splitlines())
+            resposta[arquivo] = []
+            for linha in reader:
+                resposta[arquivo].append(linha)
             return resposta
         elif arquivo in arquivos:
                 url = f'{urlBase}{arquivo}.csv'
@@ -36,8 +36,6 @@ class Crawler:
         else:
             resposta = {'erro': 404} 
         return resposta
-
-
 
 op = Crawler()
 
@@ -75,3 +73,16 @@ def main():
 if __name__ == '__main__':
   
     main()
+
+    
+
+app = FastAPI()
+
+@app.get('/')
+def get_todos_arquivos():
+    return request_embrapa()
+
+@app.get('/{arquivo:str}')
+def get_arquivo(arquivo:str):
+    return request_embrapa(arquivo)
+
