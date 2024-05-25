@@ -32,29 +32,33 @@ A API vai servir para alimentar uma base de dados que futuramente será usada pa
 - Biblioteca Streamlit para criação de interface de requisições da API.
 
 ## 🔧 Instalação
-Criação do ambiente virtual:
-
+Para criação do ambiente virtual, abra o diretório do projeto e execute os seguintes comandos no terminal:
 ````
-python -m venv nome
-````
-Instalação das dependências:
+python -m venv nomeDoAmbienteVirtual
 
+.\nomeDoAmbienteVirtual\Scripts\activate
 ````
-pip install fastapi
-pip install uvicorn
-pip install streamlit
+Para instalação das dependências, execute o seguinte comando:
 ````
-Para execução tanto do servidor Uvicorn da API, quanto da interface Streamlit, abra dois terminais no diretório base do projeto e execute os seguintes comandos:
+pip install -r requirements.txt
+````
 
-
+## ⚙️ Execução
+Para execução do servidor Uvicorn da API, e da interface Streamlit, abra dois terminais no diretório base do projeto e execute os seguintes comandos:
 - Terminal 1:
 ````
+.\nomeDoAmbienteVirtual\Scripts\activate
+
 uvicorn main:api
 ````
 - Terminal 2:
 ````
+.\nomeDoAmbienteVirtual\Scripts\activate
+
 streamlit run app.py
 ````
+
+Com os dois terminais rodando as respectivas aplicações, é possível fazer requisições à plataforma do Embrapa através de requests na interface do Streamlit.
 
 ## ✒️ Autores
 
