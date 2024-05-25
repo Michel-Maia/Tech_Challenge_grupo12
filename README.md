@@ -29,6 +29,7 @@ A API vai servir para alimentar uma base de dados que futuramente será usada pa
 - Interpretador Python para execução dos códigos;
 - Biblioteca FastAPI para criação da API;
 - Biblioteca Uvicorn para criação de servidor da API.
+- Biblioteca Streamlit para criação de interface de requisições da API.
 
 ## 🔧 Instalação
 Criação do ambiente virtual:
@@ -41,6 +42,18 @@ Instalação das dependências:
 ````
 pip install fastapi
 pip install uvicorn
+pip install streamlit
+````
+Para execução tanto do servidor Uvicorn da API, quanto da interface Streamlit, abra dois terminais no diretório base do projeto e execute os seguintes comandos:
+
+
+- Terminal 1:
+````
+uvicorn main:api
+````
+- Terminal 2:
+````
+streamlit run app.py
 ````
 
 ## ✒️ Autores
