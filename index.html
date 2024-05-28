@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/css/stlyle.css">
     <title>The Outliers</title>
-
 </head>
 
 <body>
     <header>
-
         <div class="menu-icon" onclick="toggleMenu()">
             <div class="bar"></div>
             <div class="bar"></div>
@@ -23,68 +22,66 @@
 
         <nav id="nav-menu" class="hidden"> 
             <ul>
-                <li><a href="#Request API" class="menu__link">Request API</a></li>
-                <li> <a href="#Uso da API" class="menu__link">Uso da API</a></li>
-                <li><a href="#URL base" class="menu__link">URL base</a></li>
+                <li><a href="#Escopo" class="menu__link">Escopo</a></li>
+                <li><a href="#Conteúdo da API" class="menu__link">Conteúdo da API</a></li>
+                <li><a href="#Endpoints" class="menu__link">Endpoints</a></li>
                 <li><a href="#Exemplo prático de uso" class="menu__link">Exemplo prático de uso</a></li>
                 <li><a href="#Importação de bibliotecas" class="menu__link">Importação de bibliotecas</a></li>
-                <li> <a href="#Observações" class="menu__link">Observações</a></Li>
-                <li> <a href="#Deploy" class="menu__link">Deploy</a></li>
+                <li><a href="#Observações" class="menu__link">Observações</a></Li>
+                <li><a href="#Deploy" class="menu__link">Deploy</a></li>
                 <li><a href="#Amostra do LOG da aplicação" class="menu__link">Amostra do LOG da aplicação</a></li>
                 <li><a href="#Autenticação" class="menu__link">Autenticação</a></li>
             </ul>
         </nav>
     </header>
 
-
     <div class="background-image"></div>
 
     <div class="container">
         <ul class="autores">
             <li>Isabellí Souza - RM355851</li>
-            <li>Lucas Santos - RM355050</li>
+            <li>Lucas Souza - RM355050</li>
             <li>Michel Maia - RM354997</li>
             <li>Valquíria Pires - RM356272</li>
         </ul>      
     </div>
 
-   
-    <section class="doc_Container" id="Request API">
-        <h2>Request API</h2> </br>
-        <article class="doc_Container_texto"> 
-                    
+    <section class="doc_Container" id="Escopo">
+        <h2>Escopo</h2> </br>
+        <article class="doc_Container_texto">   
             <p>
-                O Grupo 12 criou um request para consumir uma API pública sobre os dados de vitivinicultura da Embrapa disponíveis no site <a href="http://vitibrasil.cnpuv.embrapa.br/" target="_blank">Vitibrasil Embrapa</a>. A consultoria contratada tem como objetivo analisar e utilizar esses dados para alimentar uma base de dados e, posteriormente, aplicar um modelo de Machine Learning.
+                Nesta fase da TechChallenge, o Grupo 12 criou uma API de consulta sobre os dados de vitivinicultura da Embrapa disponíveis no site <a href="http://vitibrasil.cnpuv.embrapa.br/">Vitibrasil Embrapa</a>. Esta API tem como finalidade fornecer dados para análise e uso posterior em futuras fases do TechChallenge na criação e implementação de um modelo de Machine Learning.
             </p>
         </article>
     </section>
 
-    <section class="doc_Container" id="Uso da API">
-        <h2>Uso da API</h2> </br>
+    <section class="doc_Container" id="Conteúdo da API">
+        <h2>Conteúdo da API</h2> </br>
         <article class="doc_Container_texto">    
-            <h2>A API permite acessar informações nas seguintes abas do site:</h2>
+            <h3>A API permite acessar informações nas seguintes abas do site:</h3>
+            <br>
                 <ul>
-                    <ol>Produção</ol>
-                    <ol>Processamento</ol>
-                    <ol>Comercialização</ol>
-                    <ol>Importação</ol>
-                    <ol>Exportação</ol>
+                    <ol>- Produção;</ol>
+                    <ol>- Processamento;</ol>
+                    <ol>- Comercialização;</ol>
+                    <ol>- Importação;</ol>
+                    <ol>- Exportação.</ol>
                 </ul>
+                <br>
                 <p>
                     Essa API será fundamental para integrar os dados da Embrapa de forma organizada e acessível, possibilitando a realização de análises mais aprofundadas e a construção de modelos preditivos na área de vitivinicultura.
                 </p>
         </article>
     </section>
 
-    <section class="doc_Container" id="URL base">
-        <h2>URL base</h2> </br>
-        <article class="doc_Container_texto">
-               
+    <section class="doc_Container" id="Endpoints">
+        <h2>Endpoints</h2> </br>
+        <article class="doc_Container_texto"> 
+            <h3>Existem dois possíveis endpoints de consulta a dados:</h3>
+            <img class="img_fiap" src="./assets/img/img_01_url.png" alt="Endpoints da API">   
             <p>
-                O URL base usado para a API é formatado conforme mostrado abaixo:
-            </p>    
-            <img class="img_fiap" src="./assets/img/img_01_url.png" alt="URL Base">        
-
+                TESTE
+            </p>       
         </article>
     </section>
 
@@ -202,7 +199,7 @@
     </section>
    
     <div class="logo_ml">
-        <img src="./assets/img/fiap_2.png" alt="Fiap logo ML">
+        <img src="./assets/img/fiap_2.png" alt="Fiap logo ML" class="center-img">
     </div>
     <script src="./js/script.js"></script>
     <footer>
