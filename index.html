@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/css/stlyle.css">
     <title>The Outliers</title>
-
 </head>
 
 <body>
     <header>
-
         <div class="menu-icon" onclick="toggleMenu()">
             <div class="bar"></div>
             <div class="bar"></div>
@@ -23,187 +22,171 @@
 
         <nav id="nav-menu" class="hidden"> 
             <ul>
-                <li><a href="#Request API" class="menu__link">Request API</a></li>
-                <li> <a href="#Uso da API" class="menu__link">Uso da API</a></li>
-                <li><a href="#URL base" class="menu__link">URL base</a></li>
-                <li><a href="#Exemplo prático de uso" class="menu__link">Exemplo prático de uso</a></li>
-                <li><a href="#Importação de bibliotecas" class="menu__link">Importação de bibliotecas</a></li>
-                <li> <a href="#Observações" class="menu__link">Observações</a></Li>
-                <li> <a href="#Deploy" class="menu__link">Deploy</a></li>
-                <li><a href="#Amostra do LOG da aplicação" class="menu__link">Amostra do LOG da aplicação</a></li>
-                <li><a href="#Autenticação" class="menu__link">Autenticação</a></li>
+                <li><a href="#Escopo" class="menu__link">Escopo</a></li>
+                <li><a href="#Instalação" class="menu__link">Instalação</a></li>
+                <li><a href="#Execução" class="menu__link">Execução</a></li>
+                <li><a href="#Conteúdo da API" class="menu__link">Conteúdo da API</a></li>
+                <li><a href="#FastAPI - Endpoints" class="menu__link">FastAPI - Endpoints</a></li>
+                <li><a href="#Requests - Embrapa" class="menu__link">Requests - Embrapa</a></li>
+                <li><a href="#Streamlit - Interface" class="menu__link">Streamlit - Interface</a></li>
             </ul>
         </nav>
     </header>
 
-
     <div class="background-image"></div>
-
+    <h1 style="text-align: center;"> Autores </h1>
     <div class="container">
         <ul class="autores">
-            <li>Isabellí Souza - RM355851</li>
-            <li>Lucas Santos - RM355050</li>
-            <li>Michel Maia - RM354997</li>
-            <li>Valquíria Pires - RM356272</li>
+            <ol>Isabellí Souza - RM355851</ol>
+            <ol>Lucas Souza - RM355050</ol>
+            <ol>Michel Maia - RM354997</ol>
+            <ol>Valquíria Pires - RM356272</ol>
         </ul>      
     </div>
 
-   
-    <section class="doc_Container" id="Request API">
-        <h2>Request API</h2> </br>
-        <article class="doc_Container_texto"> 
-                    
+    <section class="doc_Container" id="Escopo">
+        <h2>Escopo</h2> </br>
+        <article class="doc_Container_texto">   
             <p>
-                O Grupo 12 criou um request para consumir uma API pública sobre os dados de vitivinicultura da Embrapa disponíveis no site <a href="http://vitibrasil.cnpuv.embrapa.br/" target="_blank">Vitibrasil Embrapa</a>. A consultoria contratada tem como objetivo analisar e utilizar esses dados para alimentar uma base de dados e, posteriormente, aplicar um modelo de Machine Learning.
+                Nesta fase da TechChallenge, o Grupo 12 criou uma API de consulta sobre os dados de vitivinicultura da Embrapa 
+                disponíveis no site <a href="http://vitibrasil.cnpuv.embrapa.br/">Vitibrasil Embrapa</a>. Esta API tem como finalidade 
+                fornecer dados para análise e uso posterior em futuras fases do TechChallenge na criação e implementação de um modelo 
+                de Machine Learning.
             </p>
         </article>
     </section>
 
-    <section class="doc_Container" id="Uso da API">
-        <h2>Uso da API</h2> </br>
+    <section class="doc_Container" id="Instalação">
+        <h2>Instalação</h2> </br>
+        <article class="doc_Container_texto">   
+            <p>
+                <b>Para criação do ambiente virtual, abra o diretório do projeto e execute os seguintes comandos no terminal:</b>
+                <br>
+                <br>
+                python -m venv nomeDoAmbienteVirtual
+                <br>
+                .\nomeDoAmbienteVirtual\Scripts\activate
+                <br>
+                <br>
+                <b>Para instalação das dependências, execute o seguinte comando:</b>
+                <br>
+                <br>
+                pip install -r requirements.txt
+            </p>
+        </article>
+    </section>
+
+    <section class="doc_Container" id="Execução">
+        <h2>Execução</h2> </br>
+        <article class="doc_Container_texto">   
+            <p>
+                <h3>Para execução do servidor Uvicorn da API, e da interface Streamlit, abra dois terminais no diretório base do projeto e execute os seguintes comandos:</h3>
+                <br>
+                <b>Terminal 1:</b>
+                <br>
+                .\nomeDoAmbienteVirtual\Scripts\activate
+                <br>
+                uvicorn main:api
+                <br>
+                <br>
+                <b>Terminal 2:</b>
+                <br>
+                .\nomeDoAmbienteVirtual\Scripts\activate
+                <br>
+                streamlit run app.py
+                <br>
+                <br>
+                Com os dois terminais rodando as respectivas aplicações, é possível fazer requisições à plataforma do Embrapa através de requests na interface do Streamlit.
+            </p>
+        </article>
+    </section>
+
+    <section class="doc_Container" id="Conteúdo da API">
+        <h2>Conteúdo da API</h2> </br>
         <article class="doc_Container_texto">    
-            <h2>A API permite acessar informações nas seguintes abas do site:</h2>
-                <ul>
-                    <ol>Produção</ol>
-                    <ol>Processamento</ol>
-                    <ol>Comercialização</ol>
-                    <ol>Importação</ol>
-                    <ol>Exportação</ol>
+            <h3>A API permite acessar informações nas seguintes abas do site:</h3>
+            <br>
+                <ul class="biblioteca_li">
+                    <li> Produção;</li>
+                    <li> Processamento;</li>
+                    <li> Comercialização;</li>
+                    <li> Importação;</li>
+                    <li> Exportação.</li>
                 </ul>
+                <br>
                 <p>
-                    Essa API será fundamental para integrar os dados da Embrapa de forma organizada e acessível, possibilitando a realização de análises mais aprofundadas e a construção de modelos preditivos na área de vitivinicultura.
+                    Essa API será fundamental para integrar os dados da Embrapa de forma organizada e acessível, possibilitando 
+                    a realização de análises mais aprofundadas e a construção de modelos preditivos na área de vitivinicultura.
                 </p>
         </article>
     </section>
 
-    <section class="doc_Container" id="URL base">
-        <h2>URL base</h2> </br>
-        <article class="doc_Container_texto">
-               
+    <section class="doc_Container" id="FastAPI - Endpoints">
+        <h2>FastAPI - Endpoints</h2> </br>
+        <article class="doc_Container_texto"> 
+            <h3>Existem três possíveis endpoints de consulta a dados:</h3>
+            <img class="img_fiap" src="./assets/img/img_endpoints.png" alt="Endpoints da API">   
             <p>
-                O URL base usado para a API é formatado conforme mostrado abaixo:
-            </p>    
-            <img class="img_fiap" src="./assets/img/img_01_url.png" alt="URL Base">        
-
+                O primeiro endpoint é o "<b>/listar_arquivos</b>", cujo conteúdo retornado é um dicionário (JSON) com os nomes de arquivos
+                que a API é capaz de fornecer, originados da base de dados de vitivinicultura do Embrapa. Os nomes de arquivos válidos são:
+                <br>
+                <br>
+                <ul class="biblioteca_li">
+                    <li> Producao; </li>
+                    <li> ProcessaViniferas; </li>
+                    <li> ProcessaAmericanas; </li>
+                    <li> ProcessaMesa; </li>
+                    <li> ProcessaSemclass; </li>
+                    <li> Comercio; </li>
+                    <li> ImpVinhos; </li>
+                    <li> ImpEspumantes; </li>
+                    <li> ImpFrescas;</li>
+                    <li> ImpPassas; </li>
+                    <li> ImpSuco; </li>
+                    <li> ExpVinho; </li>
+                    <li> ExpEspumantes; </li>
+                    <li> ExpUva; </li>
+                    <li> ExpSuco.</li>
+                </ul>
+                <br>
+                O segundo endpoint é o "<b>/dados</b>", que retorna um dicionário (JSON) com o conteúdo de todos arquivos acima listados, sendo 
+                as chaves do dicionário os nomes dos arquivos, e os valores sendo seus respectivos conteúdos.
+                <br>
+                <br>
+                O terceiro possível endpoint é uma extensão do segundo, sendo este "<b>/dados/{arquivo}</b>". Caso seja fornecido um nome de arquivo para o 
+                endpoint "<b>/dados</b>" como parâmetro opcional, será retornado somente o conteúdo do arquivo escolhido ao invés de todos os demais.
+            </p>       
         </article>
     </section>
 
-    <section class="doc_Container" id="Exemplo prático de uso">
-        <h2>Exemplo prático de uso</h2> </br>
+    <section class="doc_Container" id="Requests - Embrapa">
+        <h2>Requests - Embrapa</h2>
             <article class="doc_Container_part1">            
-                <h2>DEF request_embrapa(arquivo = None):</h2>
-                <img class="img_fiap" src="./assets/img/img_02_ex_pratico.png" alt="Exemplo prático">
-            <p>Esse trecho de código em Python é uma função chamada request_embrapa que realiza uma operação de web scraping para extrair informações de opções de um site específico. Vamos analisar passo a passo o que o código está fazendo:
+                <img class="img_fiap" src="./assets/img/img_embrapa.png" alt="Lógica de requisições ao Embrapa">
+            <p>
+                Dentro do módulo "<b>Embrapa</b>" há o conteúdo para o qual todos endpoints do FastAPI referenciam. A variável global "<b>arquivos</b>" contém
+                a lista retornada com os nomes válidos para conteúdos do Embrapa ao acessar o endpoint "<b>/listar_arquivos</b>".
+                <br>
+                <br>
+                Já a função "<b>request(arquivo)</b>" é responsável pelo acesso ao portal Embrapa, e também pela prospecção, processamento e retorno de todos os conteúdos 
+                de arquivos solicitados pelos endpoints "<b>/dados</b>" e "<b>/dados/{arquivo}</b>".
             </p>   
             </article>
     </section>
 
-    <section class="doc_Container" id="Importação de bibliotecas">           
-        <h2>Importação de bibliotecas</h2> </br>
+    <section class="doc_Container" id="Streamlit - Interface">           
+        <h2>Streamlit - Interface</h2>
         <article class="doc_Container_texto">  
-            <h3>Definição da função <span class="texto_span">request_embrapa:</span></h3></br>
-                <p>
-                    <ul>
-                        <li>
-                            A função <span class="texto_span">request_embrapa</span>  é responsável por fazer solicitações HTTP para a API da Embrapa (Empresa Brasileira de Pesquisa Agropecuária) para baixar dados específicos relacionados à viticultura e vinicultura.
-                        </li></br>
-                        <li>
-                            Ela possui um parâmetro opcional <span class="texto_span">arquivo</span>  que determina o tipo de arquivo a ser baixado. 
-                        Se nenhum arquivo específico for fornecido, a função baixará todos os arquivos disponíveis.
-                        </li></br>
-                    </ul>
-                </p>
-
-            <h3>Parâmetros: </h3></br>
-                <h4>Arquivo (opcional): </h4>
-                <p>
-                    Uma string que indica o tipo de arquivo a ser baixado. Se não for fornecido, a função baixará todos os arquivos disponíveis.
-                </p> </br>
-
-                <h4>Exemplo de Uso:</h4> </br>
-                <p>
-                    <span class="texto_span">import requests </br>
-                import csv </br></span></br>
-                Chama a função sem especificar o arquivo para baixar todos os arquivos disponíveis:</br>
-                dados = request_embrapa()</br>
-                Chama a função especificando o arquivo desejado:</br>dados = request_embrapa('Producao')
-                </p> </br>
-                <h4>Retorno:</h4>
-                <p>
-                    A função retorna um dicionário contendo os dados baixados. 
-                    Se houver um erro durante o processo, o dicionário conterá uma chave erro com o código de erro correspondente.
-                </p> </br>
-                <h4>Exemplo de retorno bem-sucedido:</h4> </br>
-                <img class="img_fiap" src="./assets/img/img_03_ex_retorno_sucesso.png" alt="Exemplo retorno bem sucedido">
-                <h4>Exemplo de retorno com erro: </h4></br>
-                <img class="img_fiap" src="./assets/img/img_04_ex_retorno_erro.png" alt="Exemplo retorno com erro">
+            <img class="img_fiap" src="./assets/img/img_streamlit.png" alt="Lógica do Streamlit">
+            <p>
+                O Streamlit fornece a interface ao usuário para realizar testes na API citada acima. Foi construída uma interface simples, com uma caixa de seleção
+                para escolher o Endpoint a ser testado, e um botão para fazer a requisição. Caso o usuário selecione o endpoint "<b>/dados/{arquivo}</b>", será exibida
+                uma caixa de texto para inserir o nome do arquivo desejado. O layout da interface pode ser visto abaixo:
+            </p>
+            <img class="img_fiap" src="./assets/img/img_interface.png" alt="Interface do Streamlit">
         </article>
     </section> 
 
-    <section class="doc_Container" id="Observações">           
-        <h2>Observações</h2> </br>
-        <article class="doc_Container_texto"> 
-           
-            <p>Necessário ter a biblioteca <span class="texto_span">requests </span> instalada para usar esta função.</br>  Os arquivos disponíveis para download são:</br> </br>
-            
-            <ul class="biblioteca_li">
-                <li>'Producao', </li>
-                <li>'ProcessaViniferas', </li>
-                <li>'ProcessaAmericanas', </li>
-                <li>'ProcessaMesa', </li>
-                <li>'ProcessaSemclass', </li>
-                <li>'Comercio', </li>
-                <li>'ImpVinhos', </li>
-                <li>'ImpEspumantes', </li>
-                <li>'ImpFrescas',</li>
-                <li>'ImpPassas', </li>
-                <li>'ImpSuco', </li>
-                <li>'ExpVinho', </li>
-                <li>'ExpEspumantes', </li>
-                <li>'ExpUva' e </li>
-                <li>'ExpSuco'.</li>
-            </ul>
-            </p>
-
-        </article>
-    </section>
-
-    <section class="doc_Container" id="Deploy">
-        <h2>Deploy</h2> </br>
-        <article class="doc_Container_texto">
-            <p>
-                O deploy foi realizado a partir da biblioteca <span class="texto_span">Streamlit</span> que permite a realização do deploy em ambiente cloud de forma gratuita.
-            </p> </br>
-            <img class="img_fiap" src="./assets/img/img_deploy.png" alt="Imagem deploy">
-
-        </article>
-    </section>
-
-    <section class="doc_Container" id="Amostra do LOG da aplicação">
-        <h2>Uma amostra do LOG da aplicação:</h2> </br>
-        <article class="doc_Container_texto">
-            <img class="img_fiap" src="./assets/img/img_log_aplicacao.png" alt="Imagem mostrando o log da aplicação"> </br>
-            <p>
-                O click de acesso é: <a href="https://techchallengegrupo12-jvbeg3wur4ev938no5nsxp.streamlit.app/" target="_blank">Tech Challenge</a> </br>
-            </br>
-            Nota-se a criação de uma chave SSH </br>
-            </p>
-            <img class="img_fiap" src="./assets/img/img_chave.png" alt="Chave SSH">
-        </article>
-    </section>
-
-    <section class="doc_Container" id="Autenticação">
-        <h2>Autenticação</h2> </br>
-        <article class="doc_Container_texto">
-            <p>
-                Nota : Por tratar-se de uma API pública, a autenticação não é necessária. 
-            </p>
-        </article>
-    </section>
-   
-    <div class="logo_ml">
-        <img src="./assets/img/fiap_2.png" alt="Fiap logo ML">
-    </div>
     <script src="./js/script.js"></script>
     <footer>
         <p>Desenvolvido para fins acadêmicos</p>
