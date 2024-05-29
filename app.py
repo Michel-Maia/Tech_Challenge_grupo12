@@ -4,7 +4,7 @@ import json
 
 API_URL = 'http://localhost:8000'
 
-st.title('Frontend de Teste para API Embrapa')
+st.title('Interface de teste da API Embrapa')
 
 endpoints = {
     '/dados': 'Obter todos os dados',
